@@ -1,0 +1,20 @@
+# Go build outputs
+/mini-http-server/mini-http-server
+/mini-http-server/mini-http-server.exe
+/mini-dns-server/mini-dns-server
+*.exe
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Crawl database
+mini-crawler-search/index.db
+index.db-wal
+index.db-shm
+
+# OS noise
+.DS_Store
+Thumbs.db

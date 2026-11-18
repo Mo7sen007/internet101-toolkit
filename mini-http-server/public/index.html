@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Internet 101 — My Web Server</title>
+  <meta name="description" content="The default page of the Internet 101 mini web server.">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070b14;
+      --panel: #ffffff08;
+      --line: #ffffff14;
+      --text: #e6edf7;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-2: #a78bfa;
+      --warm: #fbbf24;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(900px 500px at 15% -10%, #1d4ed833 0%, transparent 60%),
+        radial-gradient(700px 500px at 100% 0%, #7c3aed22 0%, transparent 55%),
+        var(--bg);
+      font: 17px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      padding: clamp(1.25rem, 4vw, 3rem);
+    }
+    .wrap { max-width: 980px; margin: 0 auto; }
+    header { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;
+             justify-content: space-between; margin-bottom: clamp(2rem, 6vw, 4rem); }
+    .brand { display: flex; align-items: center; gap: .65rem; font-weight: 650;
+             letter-spacing: .02em; }
+    .logo { width: 34px; height: 34px; border-radius: 9px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            display: grid; place-items: center; color: #04121f; font-weight: 800; }
+    .pill { font-size: .75rem; letter-spacing: .14em; text-transform: uppercase;
+            color: #bae6fd; background: #0ea5e91a; border: 1px solid #38bdf855;
+            padding: .3rem .7rem; border-radius: 999px; }
+    h1 { font-size: clamp(2.1rem, 6vw, 3.6rem); line-height: 1.08; margin: 0 0 1rem;
+         letter-spacing: -.02em; }
+    h1 em { font-style: normal;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .lead { font-size: clamp(1rem, 2.2vw, 1.2rem); color: #c3d0e2; max-width: 62ch; }
+    .grid { display: grid; gap: 1rem; margin-top: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+    .card { background: var(--panel); border: 1px solid var(--line);
+            border-radius: 16px; padding: 1.3rem 1.4rem; }
+    .card h2 { font-size: .78rem; letter-spacing: .16em; text-transform: uppercase;
+               color: var(--muted); margin: 0 0 .8rem; font-weight: 600; }
+    .card p { margin: 0; color: #c3d0e2; }
+    .card p + p { margin-top: .7rem; }
+    ul { margin: .4rem 0 0; padding-left: 1.15rem; color: #c3d0e2; }
+    li + li { margin-top: .35rem; }
+    code, .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+                  font-size: .9em; }
+    code { background: #ffffff0d; border: 1px solid #ffffff14; border-radius: 6px;
+           padding: .12em .4em; color: var(--warm); }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .live { display: flex; align-items: center; gap: .55rem; margin-top: 2.5rem;
+            padding: .9rem 1.1rem; border-radius: 12px; background: #22c55e0d;
+            border: 1px solid #22c55e33; color: #bbf7d0; font-size: .92rem; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; background: #22c55e;
+           box-shadow: 0 0 12px #22c55e; flex: none; }
+    footer { margin-top: 3rem; color: #64748b; font-size: .85rem;
+             border-top: 1px solid var(--line); padding-top: 1.2rem; }
+    .kbd { display: inline-block; border: 1px solid #ffffff2b; border-bottom-width: 2px;
+           border-radius: 5px; padding: 0 .35em; font-size: .82em; color: #e2e8f0; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <span class="logo">101</span>
+        <span>Internet 101</span>
+      </div>
+      <span class="pill">Station: Web Server</span>
+    </header>
+
+    <main>
+      <h1>This page came from <em>your own laptop</em>.</h1>
+      <p class="lead">
+        A browser on this machine opened a TCP connection, sent an HTTP request for
+        <code>/</code>, and this file came back. No cloud, no data centre — just a
+        few hundred lines of Go on your local network.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h2>What just happened?</h2>
+          <p>
+            Your browser resolved a hostname to an IP address, connected to port
+            <code>8080</code>, and sent something like:
+          </p>
+          <p class="mono" style="color:#93c5fd">GET / HTTP/1.1</p>
+          <p>
+            The server answered with headers and this HTML file. Look at the server
+            terminal — the request is printed there.
+          </p>
+        </div>
+
+        <div class="card">
+          <h2>Your turn</h2>
+          <ul>
+            <li>Edit <code>public/index.html</code> and refresh.</li>
+            <li>Drop an image into <code>public/</code> and embed it.</li>
+            <li>Open <a href="/__workshop">/__workshop</a> to watch requests arrive.</li>
+            <li>Run the server with <code>--raw</code> and connect with <code>nc</code>.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>Keep exploring</h2>
+          <ul>
+            <li><a href="http://portal.web">portal.web</a> — register your own domain</li>
+            <li><a href="http://search.web:8081">search.web:8081</a> — crawl the mini-web</li>
+            <li><a href="/__status">/__status</a> — server stats as JSON</li>
+          </ul>
+          <p style="margin-top:.8rem;color:#94a3b8;font-size:.88rem">
+            These links work once the DNS server and other stations are running.
+          </p>
+        </div>
+      </div>
+
+      <div class="live">
+        <span class="dot"></span>
+        <span id="status">Connected to the workshop server.</span>
+      </div>
+    </main>
+
+    <footer>
+      Internet 101 toolkit · mini-http-server · press <span class="kbd">Ctrl</span> +
+      <span class="kbd">C</span> in the terminal to stop the server.
+    </footer>
+  </div>
+
+  <script>
+    // A tiny live counter, served by the same Go binary at /__status.
+    const statusEl = document.getElementById("status");
+    async function refreshStatus() {
+      try {
+        const res = await fetch("/__status", { cache: "no-store" });
+        const data = await res.json();
+        statusEl.textContent =
+          "HTTP mode on port " + data.port +
+          " · " + data.requests_total + " request(s) served" +
+          " · up " + data.uptime_seconds + "s";
+      } catch (err) {
+        statusEl.textContent = "Server status unavailable (raw mode?).";
+      }
+    }
+    refreshStatus();
+    setInterval(refreshStatus, 5000);
+  </script>
+</body>
+</html>

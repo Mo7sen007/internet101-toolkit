@@ -1,0 +1,3 @@
+# Internet 101 - domain portal
+# Install with:  python3 -m pip install -r requirements.txt
+Flask>=3.0,<4
